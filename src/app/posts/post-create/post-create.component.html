@@ -1,0 +1,84 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        placeholder="Job Title"
+      />
+      <mat-error *ngIf="form.get('title').invalid"
+        >Please enter a post title.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="company"
+        placeholder="Company Name"
+      />
+      <mat-error *ngIf="form.get('company').invalid"
+        >Please enter the company name.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="location"
+        placeholder="Location"
+      />
+      <mat-error *ngIf="form.get('location').invalid"
+        >Please enter the location.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Full/Part-time</mat-label>
+      <mat-select formControlName="time">
+        <mat-option value="full-time">Full Time</mat-option>
+        <mat-option value="part-time">Part Time</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('time').invalid"
+        >Please select any one option.</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="4"
+        formControlName="role"
+        placeholder="Type the role of the job"
+      ></textarea>
+      <mat-error *ngIf="form.get('role').invalid"
+        >Please enter the role of job.</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="4"
+        formControlName="description"
+        placeholder="Type the description of the job"
+      ></textarea>
+      <mat-error *ngIf="form.get('description').invalid"
+        >Please enter the description.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        formControlName="hour"
+        placeholder="Enter the working hours"
+      />
+      <mat-error *ngIf="form.get('hour').invalid"
+        >Please enter the working hours.</mat-error
+      >
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">Save Post</button>
+  </form>
+</mat-card>

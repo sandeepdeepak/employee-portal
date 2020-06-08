@@ -1,0 +1,14 @@
+<mat-card-title
+  ><h5>{{ data.post.title }}</h5></mat-card-title
+>
+<mat-card-subtitle
+  >{{ data.post.company }} , {{ data.post.location }}</mat-card-subtitle
+>
+<div mat-dialog-content>
+  <h6 *ngIf="data.post.time == 'full-time'">Full-Time Job</h6>
+  <h6 *ngIf="data.post.time == 'part-time'">Part-Time Job</h6>
+  <h6>Role:</h6>
+  <div>{{ data.post.role }}</div>
+  <h6 class="mt-3">Description:</h6>
+  <div>{{ data.post.description }}</div>
+</div>

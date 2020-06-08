@@ -1,0 +1,58 @@
+<div class="job-list">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <mat-card class="example-card mb-1" *ngFor="let post of posts">
+    <mat-card-header>
+      <mat-card-title
+        ><h5>{{ post.title }}</h5></mat-card-title
+      >
+      <mat-card-subtitle
+        >{{ post.company }} , {{ post.location }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <p class="ml-3">
+        {{ post.description }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="userIsAuthenticated && role == 'admin'">
+      <a
+        mat-raised-button
+        class="ml-3 mr-2"
+        color="primary"
+        [routerLink]="['/edit', post.id]"
+        >EDIT</a
+      >
+      <button mat-stroked-button color="warn" (click)="onDelete(post.id)">
+        DELETE
+      </button>
+      <a
+        mat-stroked-button
+        class="ml-3 mr-2"
+        color="primary"
+        (click)="openMoreDetailsDialog(post)"
+        >More Details</a
+      >
+    </mat-card-actions>
+    <mat-card-actions *ngIf="userIsAuthenticated && role == 'user'">
+      <a
+        mat-stroked-button
+        class="ml-3 mr-2"
+        color="primary"
+        (click)="openMoreDetailsDialog(post)"
+        >More Details</a
+      >
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onApply(post.id, post)"
+      >
+        APPLY
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">
+    No posts added yet!
+  </p>
+</div>
