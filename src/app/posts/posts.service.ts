@@ -36,6 +36,7 @@ export class PostsService {
                 location: post.location,
                 role: post.role,
                 time: post.time,
+                applied: post.applied,
               };
             }),
             maxPosts: postData.maxPosts,

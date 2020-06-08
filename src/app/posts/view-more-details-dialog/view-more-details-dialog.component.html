@@ -11,4 +11,10 @@
   <div>{{ data.post.role }}</div>
   <h6 class="mt-3">Description:</h6>
   <div>{{ data.post.description }}</div>
+
+  <h6 class="mt-3">Applied users:</h6>
+  <div *ngFor="let user of data.post.applied">
+    {{ user.email }} -
+    <a [href]="user.resumePath" target="_blank">DownLoad Resume</a>
+  </div>
 </div>

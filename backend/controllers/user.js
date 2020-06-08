@@ -66,3 +66,28 @@ exports.userLogin = (req, res, next) => {
       });
     });
 };
+
+exports.uploadResume = (req, res, next) => {
+  let resumePath = req.body.resumePath;
+  if (req.file) {
+    const url = req.protocol + "://" + req.get("host");
+    resumePath = url + "/resumes/" + req.file.filename;
+  }
+
+  User.updateOne(
+    { _id: req.userData.userId },
+    { $set: { resumePath: resumePath } }
+  )
+    .then((result) => {
+      if (result.n > 0) {
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        res.status(500).json({ message: "Couldn't upload resume!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Couldn't upload resume!",
+      });
+    });
+};

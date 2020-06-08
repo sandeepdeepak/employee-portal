@@ -151,4 +151,13 @@ export class AuthService {
       role: role,
     };
   }
+
+  uploadResume(file) {
+    const postData = new FormData();
+    postData.append("resume", file);
+
+    this.http.post(BACKEND_URL + "/upload", postData).subscribe((res) => {
+      console.log(res);
+    });
+  }
 }

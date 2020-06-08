@@ -16,3 +16,11 @@ ul {
 .spacer {
   flex: 1 1 auto;
 }
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.upload-button {
+  width: 10rem;
+}

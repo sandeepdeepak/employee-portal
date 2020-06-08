@@ -4,7 +4,18 @@
   </span>
   <span class="spacer"></span>
   <ul>
-    <li *ngIf="userIsAuthenticated">
+    <li class="upload-button">
+      <button mat-stroked-button type="button" (click)="filePicker.click()">
+        Upload Resume
+      </button>
+      <input
+        type="file"
+        #filePicker
+        name="resume"
+        (change)="onUploadResume($event)"
+      />
+    </li>
+    <li>
       <a mat-button routerLink="/create" routerLinkActive="mat-accent"
         >New Job Post</a
       >

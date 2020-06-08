@@ -8,11 +8,13 @@ const postSchema = mongoose.Schema({
   role: { type: String, required: true },
   description: { type: String, required: true },
   hour: { type: String, required: true },
-  applied: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "User",
-    default: undefined,
-  },
+  applied: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: undefined,
+    },
+  ],
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

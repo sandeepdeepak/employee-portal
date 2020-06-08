@@ -33,8 +33,6 @@ exports.createPost = (req, res, next) => {
 
 exports.updatePost = (req, res, next) => {
   const post = new Post(req.body);
-
-  this.getPost();
   Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post)
     .then((result) => {
       if (result.n > 0) {
@@ -54,6 +52,7 @@ exports.applyPost = (req, res, next) => {
   let postId = req.params.id;
   let userId = req.userData.userId;
   let reqBody = req.body;
+  reqBody._id = req.params.id;
   Post.findById(postId)
     .then((getpost) => {
       console.log(getpost);
@@ -63,13 +62,15 @@ exports.applyPost = (req, res, next) => {
         reqBody.applied = getpost.applied.push(userId);
       }
       const post = new Post(reqBody);
-      Post.updateOne({ _id: postId }, post).then((result) => {
-        if (result.n > 0) {
-          res.status(200).json({ message: "Applied successful!" });
-        } else {
-          res.status(401).json({ message: "Not authorized!" });
+      Post.updateOne({ _id: postId, creator: reqBody.creator }, post).then(
+        (result) => {
+          if (result.n > 0) {
+            res.status(200).json({ message: "Applied successful!" });
+          } else {
+            res.status(401).json({ message: "Not authorized!" });
+          }
         }
-      });
+      );
     })
     .catch((error) => {
       res.status(500).json({
@@ -80,6 +81,7 @@ exports.applyPost = (req, res, next) => {
 
 exports.getPosts = (req, res, next) => {
   Post.find()
+    .populate("applied")
     .then((documents) => {
       fetchedPosts = documents;
       return Post.count();
